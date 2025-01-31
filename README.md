@@ -24,7 +24,50 @@ Hvis vi sågar oversætter til SAS og bekræfter, at vi får det samme, så er v
 
 ## Status
 
-### Porteføljebygger
+### PD analyser
+
+`pd_analyser.py` indlæser den genererede portefølje (Se herunder).
+
+Først beregnes en ROC-kurve for modellen:
+
+![ROC-kurve](graphics/PD_ROC_curve.png)
+
+Så beregnes Somers' D på tre måder:
+- Direkte på PD
+- Med en grov inddeling af PD i 10 intervaller (som i praksis bliver til 3 pga lave PD værdier for now.)
+- Med en fin inddeling i 100 intervaller
+
+Resultaterne viser, at
+- Somers' D og AUC ganske rigtigt kan omregnes mellem hinanden
+- Binning er ikke lige meget.
+
+```
+Somers D
+Somers D: 0.49
+Modsvarende en AUC på 0.75
+
+Somers D (grov binning)
+Somers D (binned): 0.20
+Modsvarende en AUC på 0.60
+
+Somers D (fin binning)
+Somers D (binned): 0.48
+Modsvarende en AUC på 0.74
+```
+
+Så kigger vi på rangordningsevnen af en enkelt variabel som jo er antaget grupperet:
+```
+Somers D (variabel): 0.47
+Modsvarende en AUC på 0.74
+```
+
+Så det ser ud til at vi har en god metode til at rangordne PD-estimaterne.
+
+### LGD Analyser
+
+*Ikke rørt endnu...*
+
+### Porteføljebyggeren
 
 `portefoeljebygger.py` bygger både en PD portefølje og en LGD portefølje.
 
