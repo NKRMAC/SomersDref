@@ -61,6 +61,20 @@ Somers D (variabel): 0.47
 Modsvarende en AUC på 0.74
 ```
 
+`pd_analyser.sas` indeholder krydstjek.
+
+ROC-kurven er den samme (med samme AUC):
+
+![ROC-kurve](graphics/PD_ROC_curve_SAS.png)
+
+Somers' D fra `PROC LOGISTIC` er:
+`Somers' D = 0.494753`
+... og det ser jo bekendt ud.
+
+Kigger vi på `PROC FREQ`, ses det, at eksekveringstiden er for stor, hvis man ikke inddeler i bins, og det er jeg ikke nået til endnu.
+
+
+
 Så det ser ud til at vi har en god metode til at rangordne PD-estimaterne.
 
 ### LGD Analyser

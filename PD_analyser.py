@@ -38,7 +38,7 @@ print(f'Modsvarende en AUC på {0.5 + somersd_unbinned/2:.2f}')
 
 # Beregner en (groft) binned udgave
 pd_bin_edges = [0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
-pd_bins = np.digitize(y_scores, pd_bin_edges)  # Subtract 1 to make bins 0-index
+pd_bins = np.digitize(y_scores, pd_bin_edges)
 somersd_binned = somersd(y_true, pd_bins).statistic
 print('Somers D (grov binning)')
 print(f'Somers D (binned): {somersd_binned:.2f}')
@@ -46,7 +46,7 @@ print(f'Modsvarende en AUC på {0.5 + somersd_binned/2:.2f}')
 
 # Tager en finere binning
 pd_bin_edges = np.linspace(0, 1, 100)
-pd_bins = np.digitize(y_scores, pd_bin_edges)  # Subtract 1 to make bins 0-index
+pd_bins = np.digitize(y_scores, pd_bin_edges)
 somersd_binned = somersd(y_true, pd_bins).statistic
 print('Somers D (fin binning)')
 print(f'Somers D (binned): {somersd_binned:.2f}')
