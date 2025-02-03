@@ -113,7 +113,7 @@ LGD_REAL_smeared = LGD_REAL +  np.random.normal(0, 0.15, N)
 # Sæt til ikke at være negativ
 LGD_REAL_smeared = np.maximum(LGD_REAL_smeared, 0)
 
-df_lgl = pd.DataFrame({'CR': CR, 'LGL': LGL, 'LGC': LGC, 'LGD': LGD, 'cure': cure, 'cr_var': cr_var,'LGD_REAL': LGD_REAL})
+df_lgl = pd.DataFrame({'CR': CR, 'LGL': LGL, 'LGC': LGC, 'LGD': LGD, 'cure': cure, 'cr_var': cr_var,'LGD_REAL': LGD_REAL_smeared})
 
 # Plot histograms
 plt.figure(figsize=(6, 4))

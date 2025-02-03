@@ -32,7 +32,7 @@ Først beregnes en ROC-kurve for modellen:
 
 ![ROC-kurve](graphics/PD_ROC_curve.png)
 
-Så beregnes Somers' D på tre måder:
+Så beregnes Somers' D på tre måder **altid med default event som uafhængig variabel**:
 - Direkte på PD
 - Med en grov inddeling af PD i 10 intervaller (som i praksis bliver til 3 pga lave PD værdier for now.)
 - Med en fin inddeling i 100 intervaller
@@ -61,6 +61,9 @@ Somers D (variabel): 0.47
 Modsvarende en AUC på 0.74
 ```
 
+Så den skulle nok have været smearet lidt mere, da legetøjsporteføljen blev bygget.
+
+
 `pd_analyser.sas` indeholder krydstjek.
 
 ROC-kurven er den samme (med samme AUC):
@@ -79,7 +82,52 @@ Så det ser ud til at vi har en god metode til at rangordne PD-estimaterne.
 
 ### LGD Analyser
 
-*Ikke rørt endnu...*
+Cure rate er samme historie: Vi kan lave en ROC-kurve
+![ROC-kurve](graphics/CR_ROC_curve.png)
+
+Somers' D lader sig også beregne:
+```
+Somers D: 0.43
+Modsvarende en AUC på 0.72
+```
+
+Igen anvendes cure eventen som *u*afhængig variabel.
+
+Et kig på LGL er vel her, hvor vi skal finde ud hvad vi vil.
+
+Første observation er, at vi er nødt til at gruppere data for at kunne foretage beregningen i endelig tid.
+Metodedokumentet for validering foreskriver denne binning:
+- [0-5%)
+- [5-10%)
+- [10-20%)
+- [20-30%)
+- [30-40%)
+- [40-50%)
+- [50-60%)
+- [60-70%)
+- [70-80%)
+- [80-90%)
+- [90-100%)
+- [100% -)
+
+Resultaterne er:
+```
+Somers' D for LGD med realiseret LGD som uafhængig variabel:
+0.53
+ og med modelværdien som uafhængig:
+0.52
+```
+
+Hvis vi skal være konsistente ift. PD og CR, så bør vi måske igen vælge at betragte de realiserede værdier som uafhængige variable.
+
+Betragter vi LGL isoleret, så er det vel noget med at `cure = 0` og så genkøre...
+```
+Somers' D for LGL med realiseret LGL som uafhængig variabel:
+0.70
+ og med modelværdien som uafhængig:
+0.71
+```
+
 
 ### Porteføljebyggeren
 
