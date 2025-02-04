@@ -36,10 +36,9 @@ bin_edges = np.linspace(p_def.min(), p_def.max(), 21)
 bin_numbers = np.digitize(p_def, bin_edges) - 1  # Subtract 1 to make bins 0-indexed
 
 # Så rykker vi hvert bin en op eller ned med sandsynlighed p_ryk
-p_ryk = 0.05
 for i in range(len(bin_numbers)):
-    if np.random.rand() < p_ryk:
-        bin_numbers[i] = max(0,np.random.choice([bin_numbers[i] - 1, bin_numbers[i] + 1]))
+    delta = np.random.choice(np.arange(-10,10))
+    bin_numbers[i] = max(0,bin_numbers[i] + delta)
 
 # Samler en dataframe
 df_pd = pd.DataFrame({'variabel': bin_numbers, 'p_def': p_def, 'default': default})
@@ -87,13 +86,12 @@ cure = np.array([np.random.choice([0, 1], p=[1 - cr, cr]) for cr in CR])
 
 # Beskrivende variabel for CR
 bin_edges = np.linspace(CR.min(), CR.max(), 21)
-cr_var = np.digitize(CR, bin_edges)  # Subtract 1 to make bins 0-indexed
+cr_var = np.digitize(CR, bin_edges)
 
-# Så rykker vi hvert bin en op eller ned med sandsynlighed p_ryk
-p_ryk = 0.1
+# Så rykker vi hvert bin op eller ned
 for i in range(len(cr_var)):
-    if np.random.rand() < p_ryk:
-        cr_var[i] = max(0,np.random.choice([cr_var[i] - 1, cr_var[i] + 1]))
+    delta = np.random.choice(np.arange(-10,10))
+    cr_var[i] = max(0,cr_var[i] + delta)
 
 # Så er det LGC
 LGC = N*[LossGivenCure]
